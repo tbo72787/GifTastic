@@ -39,7 +39,10 @@ $(document).ready(function() {
       for (var i = 0; i < response.data.length; i++) {
         var image = $('<img>');
         image.attr('src', response.data[i].images.fixed_height_still.url);
+        var rating = $('<div>');
+        rating.text('Rating: ' + response.data[i].rating);
         $('#images').append(image);
+        $('#images').append(rating);
       }
     });
     
