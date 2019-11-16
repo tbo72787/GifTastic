@@ -20,11 +20,12 @@ $(document).ready(function() {
     buttonPop();
   });
 
+  // when instrument buttons are clicked, calls searchGiphy using the button text as argument
   $('body').on('click', '.button', function() {
-    console.log($(this).text());
     searchGiphy($(this).text());
   });
 
+  // when images are clicked, changes source to animatedURL if animated is false, and stillURL if animated is true
   $('body').on('click', '.image', function() {
     if (animated == false) {
       $(this).attr('src', $(this).attr('animatedURL'));
@@ -37,7 +38,7 @@ $(document).ready(function() {
   })
 
   // makes a call to giphy API and makes and appends an image and rating for each GIF in the response, 
-  // and add image class, stillURL, and animatedURL to image
+  // and add image, stillURL, and animatedURL classes to image
   var searchGiphy = function(term) {
 
     var apiKey = 'pu7fI2DSRxDuoVZVLEC2wTTlIsmfmdmF';
@@ -63,5 +64,7 @@ $(document).ready(function() {
     });
     
   }
+
+  // immediately calls buttonPop upon page load
   buttonPop();
 });
