@@ -1,6 +1,7 @@
 $(document).ready(function() {
   // declares global variables
   var instArr = ['guitar', 'piano', 'saxaphone', 'trumpet', 'drum', 'tambourine', 'violin'];
+  var animated = false;
 
   // empties buttons div, takes each string in instArr and appends a button for it in buttons div
   var buttonPop = function() {
@@ -24,7 +25,19 @@ $(document).ready(function() {
     searchGiphy($(this).text());
   });
 
-  // makes a call to giphy API and makes and appends an image for each GIF in the response
+  $('body').on('click', '.image', function() {
+    if (animated == false) {
+      $(this).attr('src', $(this).attr('animatedURL'));
+      animated = true;
+    }
+    else {
+      $(this).attr('src', $(this).attr('stillURL'));
+      animated = false;
+    }
+  })
+
+  // makes a call to giphy API and makes and appends an image and rating for each GIF in the response, 
+  // and add image class, stillURL, and animatedURL to image
   var searchGiphy = function(term) {
 
     var apiKey = 'pu7fI2DSRxDuoVZVLEC2wTTlIsmfmdmF';
@@ -38,7 +51,10 @@ $(document).ready(function() {
       console.log(response);
       for (var i = 0; i < response.data.length; i++) {
         var image = $('<img>');
+        image.attr('stillURL', response.data[i].images.fixed_height_still.url)
+        image.attr('animatedURL', response.data[i].images.fixed_height.url)
         image.attr('src', response.data[i].images.fixed_height_still.url);
+        image.addClass('image');
         var rating = $('<div>');
         rating.text('Rating: ' + response.data[i].rating);
         $('#images').append(image);
