@@ -11,6 +11,13 @@ $(document).ready(function() {
     }
   }
 
+  $('#submit-button').on('click', function(event) {
+    instArr = [];
+    event.preventDefault();
+    instArr.push($('#submit-input').val().trim());
+    buttonPop();
+  })
+
   var searchGiphy = function(term) {
     var apiKey = 'pu7fI2DSRxDuoVZVLEC2wTTlIsmfmdmF';
     var queryURL = 'https://api.giphy.com/v1/gifs/search?limit=10&api_key=' + apiKey + '&q=' + term;
